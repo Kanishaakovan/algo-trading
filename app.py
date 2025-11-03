@@ -400,6 +400,11 @@ def main():
     if st.sidebar.button("🔍 Analyze Ticks", type="primary"):
         st.session_state.analyze_requested = True
     
+    # Auto-run analysis on first load
+    if 'first_load' not in st.session_state:
+        st.session_state.first_load = True
+        st.session_state.analyze_requested = True
+    
     # Main analysis
     if st.session_state.get('analyze_requested', False):
         with st.spinner(f"Loading tick data for {selected_instrument} on {analysis_date}..."):
